@@ -1,0 +1,31 @@
+<section>
+  <h1>Edit Profile</h1>
+
+  <form
+    hx-post="/users/<%= user._id %>"
+    hx-target="#content"
+    hx-push-url="true"
+    class="edit-profile-form"
+  >
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <label>Bio</label>
+    <textarea name="bio"><%= user.bio || "" %></textarea>
+
+    <label>Gender</label>
+    <input name="gender" value="<%= user.gender || "" %>">
+
+    <label>Avatar URL</label>
+    <input name="avatar" value="<%= user.avatar || "" %>">
+
+    <label>Age</label>
+    <input name="age" type="number" value="<%= user.age || "" %>">
+
+    <label>Likes</label>
+    <input name="likes" type="number" value="<%= user.likes || 0 %>" />
+
+    <label>Status</label>
+    <input name="status" value="<%= user.status || "" %>">
+
+    <button type="submit">Save</button>
+  </form>
+</section>

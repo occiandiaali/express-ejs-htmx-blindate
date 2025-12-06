@@ -1,0 +1,58 @@
+<section class="user-detail">
+  <img
+    src="<%= user.avatar || 'https://ionicframework.com/docs/img/demos/avatar.svg' %>"
+    alt="<%= user.username || 'Unknown user' %>"
+    id="user-detail-avatar"
+  />
+
+  <h1><%= user.username %></h1>
+
+  <p><strong>Email:</strong> <%= user.email %></p>
+  <p><strong>Bio:</strong> <%= user.bio || "No bio yet" %></p>
+  <p><strong>Gender:</strong> <%= user.gender || "–" %></p>
+  <p><strong>Age:</strong> <%= user.age || "–" %></p>
+  <p><strong>Status:</strong> <%= user.status || "–" %></p>
+  <p><strong>Likes:</strong> <%= user.likes || 0 %></p>
+
+  <% if (currentUser && currentUser._id === user._id.toString()) { %>
+  <button
+    hx-get="/users/<%= user._id %>/edit"
+    hx-target="#content"
+    hx-push-url="true"
+  >
+    Edit profile
+  </button>
+  <% } else if (currentUser) { %>
+  <button
+    hx-get="/meetings/new/<%= user.username %>"
+    hx-target="#modal"
+    hx-swap="innerHTML"
+  >
+    Schedule meeting
+  </button>
+
+  <!-- <form hx-post="/users/<%= user._id %>/like" hx-target="#content">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <button type="submit">Like</button>
+  </form> -->
+  <form
+    hx-post="/users/<%= user._id %>/toggle-like"
+    hx-target="#content"
+    style="display: inline-block; margin: 4px"
+  >
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <button type="submit">
+      <%= user.likedBy.includes(currentUser.username) ? "Unlike" : "Like" %>
+    </button>
+  </form>
+
+  <button
+    hx-get="/messages/new/<%= user.username %>"
+    hx-target="#modal"
+    hx-swap="innerHTML"
+    style="margin: 4px"
+  >
+    Message user
+  </button>
+  <% } %>
+</section>

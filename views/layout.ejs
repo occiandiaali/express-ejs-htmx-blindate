@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blindate</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script>
+      document.addEventListener("htmx:afterSwap", (e) => {
+        if (e.target.id === "modal") {
+          const modal = document.getElementById("modal");
+          modal.classList.remove("hidden");
+        }
+      });
+
+      function closeModal() {
+        if (!confirm("Leave the meeting?")) return;
+        const modal = document.getElementById("modal");
+        modal.classList.add("hidden");
+        modal.innerHTML = "";
+      }
+
+      document.addEventListener("click", (e) => {
+        const modal = document.getElementById("modal");
+        if (!modal || modal.classList.contains("hidden")) return;
+        if (e.target === modal) {
+          //   modal.classList.add("hidden");
+          //   modal.innerHTML = "";
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          //   const modal = document.getElementById("modal");
+          //   if (modal && !modal.classList.contains("hidden")) {
+          //     modal.classList.add("hidden");
+          //     modal.innerHTML = "";
+          //   }
+          closeModal();
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <%- include("partials/navbar") %>
+    <div id="flash"><%- include("partials/flash") %></div>
+
+    <main id="content"><%- body %></main>
+
+    <div id="modal" class="modal hidden"></div>
+  </body>
+</html>

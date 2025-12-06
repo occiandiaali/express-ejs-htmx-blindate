@@ -1,0 +1,22 @@
+<div class="modal-content">
+  <button class="modal-close" onclick="closeModal()">×</button>
+
+  <h2>Message <%= targetUsername %></h2>
+
+  <form
+    hx-post="/messages/new/<%= targetUsername %>"
+    hx-target="#modal"
+    hx-swap="innerHTML"
+  >
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+    <textarea
+      name="body"
+      placeholder="Write your message..."
+      required
+      style="width: 100%; height: 120px"
+    ></textarea>
+
+    <button type="submit">Send</button>
+  </form>
+</div>

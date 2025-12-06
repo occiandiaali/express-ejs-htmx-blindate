@@ -1,0 +1,21 @@
+<div class="modal-content fullscreen-modal">
+  <button class="modal-close leave-btn" onclick="closeModal()">× Leave</button>
+
+  <div class="meeting-overlay">
+    <h1>Meeting <%= meeting.meetingID %></h1>
+    <p><strong>Date:</strong> <%= meeting.startDate %></p>
+    <p><strong>Time:</strong> <%= meeting.startTime %></p>
+    <p><strong>Scene:</strong> <%= meeting.sceneType %></p>
+    <p>
+      <strong>Participants:</strong> <%= meeting.participants.join(" & ") %>
+    </p>
+  </div>
+
+  <div class="meeting-live-area">
+    <iframe
+      src="<%= meeting.sceneURL %>"
+      class="meeting-iframe"
+      allow="fullscreen; autoplay; microphone; camera;xr-spatial-tracking"
+    ></iframe>
+  </div>
+</div>

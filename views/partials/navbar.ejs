@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/users" hx-get="/users" hx-target="#content" hx-push-url="true">
+      Blindate
+    </a>
+
+    <% if (currentUser) { %>
+    <a
+      href="/meetings"
+      hx-get="/meetings"
+      hx-target="#content"
+      hx-push-url="true"
+    >
+      Meetings
+    </a>
+    <% } %>
+  </div>
+
+  <div class="nav-right">
+    <% if (currentUser) { %>
+    <span>Hi, <%= currentUser.username %></span>
+
+    <form action="/logout" method="post" style="display: inline">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <button type="submit">Logout</button>
+    </form>
+    <% } else { %>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+    <% } %>
+  </div>
+</nav>

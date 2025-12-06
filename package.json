@@ -1,0 +1,25 @@
+{
+  "name": "blindate-ejs-htmx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.1",
+    "nanoid": "^5.1.6"
+  }
+}

@@ -1,0 +1,14 @@
+<section class="meeting-detail">
+  <h1>Meeting <%= meeting.meetingID %></h1>
+
+  <p><strong>Date:</strong> <%= meeting.startDate %></p>
+  <p><strong>Time:</strong> <%= meeting.startTime %></p>
+  <p><strong>Scene:</strong> <%= meeting.sceneType %></p>
+  <p><strong>Duration:</strong> <%= meeting.duration %> minutes</p>
+  <p><strong>Participants:</strong> <%= meeting.participants.join(" & ") %></p>
+
+  <form hx-post="/meetings/<%= meeting._id %>/delete" hx-target="#content">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <button type="submit">Cancel meeting</button>
+  </form>
+</section>

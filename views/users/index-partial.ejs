@@ -1,0 +1,30 @@
+<!-- <h1>Users</h1> -->
+
+<form
+  class="filters"
+  hx-get="/users"
+  hx-target="#content"
+  hx-push-url="true">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+  <label>Gender</label>
+  <select name="gender">
+    <option value="any" <%= filters.gender === "any" ? "selected" : "" %>>Any</option>
+    <option value="male" <%= filters.gender === "male" ? "selected" : "" %>>Male</option>
+    <option value="female" <%= filters.gender === "female" ? "selected" : "" %>>Female</option>
+    <!-- <option value="other" <%= filters.gender === "other" ? "selected" : "" %>>Other</option> -->
+  </select>
+
+  <label>Min age</label>
+  <input
+    type="number"
+    name="minAge"
+    value="<%= filters.minAge %>"
+    min="18">
+
+  <button type="submit">Apply</button>
+</form>
+
+<div class="grid">
+  <%- include("list", { users }) %>
+</div>

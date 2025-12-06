@@ -1,0 +1,18 @@
+<div class="user-card">
+  <div class="avatar">
+    <% if (user.avatar) { %>
+    <img src="<%= user.avatar %>" alt="<%= user.username %>" />
+    <% } else { %>
+    <div class="placeholder-avatar"><%= user.username[0].toUpperCase() %></div>
+    <% } %>
+  </div>
+  <h2><%= user.username %></h2>
+  <p><%= user.status || "" %></p>
+  <button
+    hx-get="/users/<%= user._id %>"
+    hx-target="#content"
+    hx-push-url="true"
+  >
+    View profile
+  </button>
+</div>
