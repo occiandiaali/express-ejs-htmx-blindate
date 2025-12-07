@@ -121,12 +121,18 @@ export async function create(req, res) {
   //   `&guest=${targetUsername}` +
   //   `&sceneType=${sceneType}` +
   //   `&duration=${duration}`;
+  //https://playcanv.as/p/kkYFilt6/ (layout place)
+  const collonadePark = "https://playcanv.as/p/kkYFilt6/";
+  let baseUrl = "";
+  if (sceneType === "collonade_park") baseUrl = collonadePark;
+  // if (sceneType === "collonade_park") {}
+  // if (sceneType === "collonade_park") {}
+  // if (sceneType === "collonade_park") {}
   const sceneURL =
-    `https://playcanv.as/p/your-scene-id/?` +
+    `${baseUrl}?` +
     `meetingID=${encodeURIComponent(meetingID)}` +
     `&host=${encodeURIComponent(req.user.username)}` +
     `&guest=${encodeURIComponent(targetUsername)}` +
-    `&sceneType=${encodeURIComponent(sceneType)}` +
     `&duration=${encodeURIComponent(duration)}`;
 
   await Meeting.create({
