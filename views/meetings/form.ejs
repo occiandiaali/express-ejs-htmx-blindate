@@ -1,51 +1,82 @@
 <div class="modal-content">
-  <h2>Schedule meeting with <%= targetUsername %></h2>
+  <h3>Schedule meeting with <%= targetUsername %></h3>
 
-  <form hx-post="/meetings" hx-target="#content" hx-swap="outerHTML">
+  <!-- <form hx-post="/meetings" hx-target="#content" hx-swap="outerHTML"> -->
+  <form
+    hx-post="/meetings"
+    hx-disabled-elt="this"
+    hx-target="#content"
+    hx-push-url="true"
+  >
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
     <input type="hidden" name="targetUsername" value="<%= targetUsername %>" />
 
-    <label>Start date (YYYY/mm/dd)</label>
-    <input name="startDate" placeholder="2025/12/31" required />
+    <label style="font-size: small">Start date (YYYY/mm/dd)</label>
+    <!-- <input name="startDate" placeholder="2025/12/31" required /><br /> -->
+    <input
+      class="inputRow"
+      name="startDate"
+      id="startDate"
+      placeholder="e.g. 2025/12/31"
+      oninput="this.value ? document.getElementById('bookButton').disabled = false : document.getElementById('bookButton').disabled = true"
+      required
+    /><br />
 
-    <label>Start time (HH:MM)</label>
-    <input name="startTime" placeholder="18:45" required />
+    <label style="font-size: small">Start time (HH:MM)</label>
+    <input
+      class="inputRow"
+      name="startTime"
+      id="startTime"
+      placeholder="e.g. 18:45"
+      oninput="this.value ? document.getElementById('bookButton').disabled = false : document.getElementById('bookButton').disabled = true"
+      required
+    /><br />
 
     <!-- <label>Scene type</label>
     <input name="sceneType" placeholder="Cafe, bar, park..." required /> -->
-    <label for="scene-select">Choose a scene:</label>
+    <label for="scene-select" style="font-size: small">Choose a scene </label>
 
-    <select name="sceneType" id="scene-select">
-      <option value="">--Please choose an option--</option>
+    <select name="sceneType" id="scene-select" class="inputRow">
+      <option value="">--Meeting location--</option>
       <option value="white_court">White Court</option>
       <option value="collonade_park">Collonade Park</option>
-      <option value="hamster">Hamster</option>
-      <option value="parrot">Parrot</option>
-      <option value="spider">Spider</option>
-      <option value="goldfish">Goldfish</option>
-    </select>
+      <option value="haunted_house">Haunted House</option>
+      <option value="parrot" disabled>Parrot</option>
+      <option value="spider" disabled>Spider</option>
+      <option value="goldfish" disabled>Goldfish</option></select
+    ><br />
 
     <!-- <label>Duration (minutes)</label>
     <input name="duration" type="number" value="60" required /> -->
     <fieldset>
-      <legend>Select a time limit:</legend>
+      <legend style="font-size: small">Select a time limit</legend>
 
       <div>
         <input type="radio" id="5" name="duration" value="5" checked />
-        <label for="5">5 mins</label>
+        <label for="5" style="font-size: small">5 mins</label>
       </div>
 
       <div>
         <input type="radio" id="10" name="duration" value="10" />
-        <label for="10">10 mins</label>
+        <label for="10" style="font-size: small">10 mins</label>
       </div>
 
       <div>
         <input type="radio" id="15" name="duration" value="15" />
-        <label for="15">15 mins</label>
+        <label for="15" style="font-size: small">15 mins</label>
       </div>
     </fieldset>
+    <br />
 
-    <button type="submit">Book</button>
+    <!-- <button type="submit" id="meetingBookBtn" hx-on:click="alert('Booking..')"> -->
+    <button
+      type="submit"
+      id="bookButton"
+      hx-on="click:this.innerText='Booking..';setTimeout(() => {this.innerText='Book';document.getElementById('startDate').value='';document.getElementById('startTime').value='';document.getElementById('scene-select').value='';}, 5000)"
+      hx-swap="none"
+      disabled
+    >
+      Book
+    </button>
   </form>
 </div>

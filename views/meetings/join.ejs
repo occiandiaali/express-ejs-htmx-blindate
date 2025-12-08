@@ -1,7 +1,7 @@
 <div class="modal-content fullscreen-modal">
-  <button class="modal-close leave-btn" onclick="closeModal()">× Leave</button>
+  <button class="modal-close leave-btn" onclick="closeModal()">Exit</button>
 
-  <div class="meeting-overlay">
+  <!-- <div class="meeting-overlay">
     <h1>Meeting <%= meeting.meetingID %></h1>
     <p><strong>Date:</strong> <%= meeting.startDate %></p>
     <p><strong>Time:</strong> <%= meeting.startTime %></p>
@@ -9,7 +9,7 @@
     <p>
       <strong>Participants:</strong> <%= meeting.participants.join(" & ") %>
     </p>
-  </div>
+  </div> -->
 
   <div class="meeting-live-area">
     <iframe
@@ -18,4 +18,7 @@
       allow="fullscreen; autoplay; microphone; camera;xr-spatial-tracking"
     ></iframe>
   </div>
+
+  <p id="participantsP"><%= meeting.participants.join(" & ") %></p>
+  <!-- <p id="timerP">Timer: <%= meeting.duration %></p> -->
 </div>

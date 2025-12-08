@@ -1,5 +1,6 @@
 console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -15,6 +16,14 @@ dotenv.config();
 
 const app = express();
 
+// const corsOptions = {
+//   origin: 'http://example.com', // Replace with your client's origin
+//   optionsSuccessStatus: 200, // For legacy browsers
+// };
+
+// app.use(cors(corsOptions));
+app.use(cors());
+
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "layout");
@@ -29,6 +38,11 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("Mongo error", err));
+
+// // Apply CORS to only specific routes
+// app.get('/api/data', cors(corsOptions), (req, res) => {
+//   res.json({ message: 'This route is CORS-enabled!' });
+// });
 
 app.get("/", (req, res) => {
   if (!req.user) return res.redirect("/login");

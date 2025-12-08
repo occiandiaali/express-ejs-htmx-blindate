@@ -1,5 +1,23 @@
 <section>
-  <h1>Edit Profile</h1>
+  <button
+    hx-get="/users/<%= user._id %>"
+    hx-target="#content"
+    hx-push-url="true"
+  >
+    back
+  </button>
+  <div
+    style="display: flex; flex-direction: row; justify-content: space-around"
+  >
+    <h2>Edit Profile</h2>
+    <img
+      src="<%= user.avatar || 'https://ionicframework.com/docs/img/demos/avatar.svg' %>"
+      alt="<%= user.username || 'Unknown user' %>"
+      width="50"
+      height="50"
+      style="border-radius: 100%"
+    />
+  </div>
 
   <form
     hx-post="/users/<%= user._id %>"
@@ -9,23 +27,61 @@
   >
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
     <label>Bio</label>
-    <textarea name="bio"><%= user.bio || "" %></textarea>
+    <textarea
+      name="bio"
+      style="max-width: 500px"
+      placeholder="A short, fun-fact about you"
+    >
+<%= user.bio || "" %></textarea
+    ><br />
 
-    <label>Gender</label>
-    <input name="gender" value="<%= user.gender || "" %>">
+    <!-- <label>Gender</label> -->
+    <!-- <input name="gender" value="<%= user.gender || "" %>"> -->
+    <fieldset style="max-width: 500px">
+      <legend style="font-size: medium">Select a gender</legend>
 
-    <label>Avatar URL</label>
-    <input name="avatar" value="<%= user.avatar || "" %>">
+      <div>
+        <input type="radio" id="m" name="gender" value="m" />
+        <label for="m" style="font-size: small">Male</label>
+      </div>
 
-    <label>Age</label>
-    <input name="age" type="number" value="<%= user.age || "" %>">
+      <div>
+        <input type="radio" id="f" name="gender" value="f" />
+        <label for="f" style="font-size: small">Female</label>
+      </div>
+    </fieldset>
+    <br />
 
-    <label>Likes</label>
-    <input name="likes" type="number" value="<%= user.likes || 0 %>" />
+    <label for="avatar">Choose a profile picture </label>
 
-    <label>Status</label>
-    <input name="status" value="<%= user.status || "" %>">
+    <input
+      type="file"
+      value="<%= user.avatar || '' %>"
+      id="avatar"
+      name="avatar"
+      accept="image/png, image/jpeg"
+      style="max-width: 500px"
+    /><br />
 
-    <button type="submit">Save</button>
+    <label for="age">Age (18-120)</label>
+
+    <input
+      type="number"
+      placeholder="Helps others with an age preference.."
+      id="age"
+      name="age"
+      value="<%= user.age || '' %>"
+      min="18"
+      max="120"
+      style="max-width: 500px"
+    /><br />
+
+    <!-- <label>Likes</label>
+    <input name="likes" type="number" value="<%= user.likes || 0 %>" /> -->
+
+    <!-- <label>Status</label>
+    <input name="status" value="<%= user.status || "" %>"> -->
+
+    <button type="submit" style="width: 64px">Save</button>
   </form>
 </section>

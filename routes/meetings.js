@@ -10,6 +10,6 @@ router.get("/new/:username", requireAuth, meetings.newForm);
 router.post("/", requireAuth, validateMeeting, meetings.create);
 router.get("/:id", requireAuth, meetings.show);
 router.post("/:id/delete", requireAuth, meetings.destroy);
-router.get("/:id/join", join);
+router.get("/:id/join", requireAuth, meetings.join);
 
 export default router;

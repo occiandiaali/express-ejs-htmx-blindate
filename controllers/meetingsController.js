@@ -122,10 +122,15 @@ export async function create(req, res) {
   //   `&sceneType=${sceneType}` +
   //   `&duration=${duration}`;
   //https://playcanv.as/p/kkYFilt6/ (layout place)
-  const collonadePark = "https://playcanv.as/p/kkYFilt6/";
+
   let baseUrl = "";
-  if (sceneType === "collonade_park") baseUrl = collonadePark;
-  // if (sceneType === "collonade_park") {}
+  if (sceneType === "collonade_park") {
+    baseUrl = "https://playcanv.as/p/kkYFilt6/";
+  } else if (sceneType === "white_court") {
+    baseUrl = "https://playcanv.as/p/ITn9wsmF/";
+  } else if (sceneType === "haunted_house") {
+    baseUrl = " https://playcanv.as/p/0ue0ILM8/";
+  }
   // if (sceneType === "collonade_park") {}
   // if (sceneType === "collonade_park") {}
   const sceneURL =
@@ -135,27 +140,30 @@ export async function create(req, res) {
     `&guest=${encodeURIComponent(targetUsername)}` +
     `&duration=${encodeURIComponent(duration)}`;
 
-  await Meeting.create({
-    meetingID,
-    startDate,
-    startTime,
-    sceneType,
-    duration,
-    sceneURL,
-    participants: [req.user.username, targetUsername],
-  });
+  try {
+    await Meeting.create({
+      meetingID,
+      startDate,
+      startTime,
+      sceneType,
+      duration,
+      sceneURL,
+      participants: [req.user.username, targetUsername],
+    });
 
-  const meetings = await Meeting.find({
-    participants: req.user.username,
-  }).lean();
+    const meetings = await Meeting.find({
+      participants: req.user.username,
+    }).lean();
 
-  const data = { meetings, csrfToken: res.locals.csrfToken };
+    const data = { meetings, csrfToken: res.locals.csrfToken };
 
-  if (req.headers["hx-request"]) {
-    return res.render("meetings/list", { ...data, layout: false });
+    if (req.headers["hx-request"]) {
+      return res.render("meetings/list", { ...data, layout: false });
+    }
+    res.redirect("/meetings");
+  } catch (error) {
+    console.error(error);
   }
-
-  res.redirect("/meetings");
 }
 
 export async function show(req, res) {

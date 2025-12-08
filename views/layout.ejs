@@ -14,7 +14,7 @@
       });
 
       function closeModal() {
-        if (!confirm("Leave the meeting?")) return;
+        if (!confirm("Are you sure?")) return;
         const modal = document.getElementById("modal");
         modal.classList.add("hidden");
         modal.innerHTML = "";
@@ -24,9 +24,8 @@
         const modal = document.getElementById("modal");
         if (!modal || modal.classList.contains("hidden")) return;
         if (e.target === modal) {
-          //   modal.classList.add("hidden");
-          //   modal.innerHTML = "";
-          closeModal();
+          modal.classList.add("hidden");
+          modal.innerHTML = "";
         }
       });
 

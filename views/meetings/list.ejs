@@ -2,7 +2,8 @@
   <% meetings.forEach(m => { %>
   <li>
     <a hx-get="/meetings/<%= m._id %>" hx-target="#content" hx-push-url="true">
-      <%= m.meetingID %> — <%= m.startDate %> <%= m.startTime %> — <%=
+      <%= m.participants.join(" & ") %><br />
+      <%= m.meetingID %> — Starts <%= m.startDate %> @ <%= m.startTime %> — <%=
       m.sceneType %>
     </a>
     <!-- <button style="background-color: green; color: white">Join</button> -->
@@ -10,7 +11,7 @@
       hx-get="/meetings/<%= m._id %>/join"
       hx-target="#modal"
       hx-swap="innerHTML"
-      style="background-color: green; color: white"
+      style="background-color: green; color: white; margin-left: 6px"
     >
       Join
     </button>
@@ -22,12 +23,20 @@
       style="display: inline"
     >
       <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-      <button type="submit" style="background-color: red; color: white">
+      <button
+        type="submit"
+        hx-on:click="alert('This cannot be undone!')"
+        style="background-color: red; color: white"
+      >
         Remove
       </button>
     </form>
   </li>
+
   <% }) %> <% if (meetings.length === 0) { %>
   <li>No meetings yet.</li>
+  <button hx-get="/users" hx-target="#content" hx-push-url="true">
+    Create some
+  </button>
   <% } %>
 </ul>

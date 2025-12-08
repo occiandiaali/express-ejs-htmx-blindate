@@ -20,6 +20,6 @@ router.post(
   users.destroy
 );
 //router.post("/:id/like", requireAuth, verifyCsrf, users.like);
-router.post("/:id/toggle-like", users.toggleLike);
+router.post("/:id/toggle-like", requireAuth, verifyCsrf, users.toggleLike);
 
 export default router;

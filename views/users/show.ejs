@@ -1,4 +1,5 @@
 <section class="user-detail">
+  <button hx-get="/users" hx-target="#content" hx-push-url="true">back</button>
   <img
     src="<%= user.avatar || 'https://ionicframework.com/docs/img/demos/avatar.svg' %>"
     alt="<%= user.username || 'Unknown user' %>"
