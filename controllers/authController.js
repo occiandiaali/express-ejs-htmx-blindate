@@ -43,7 +43,6 @@ export async function login(req, res) {
     process.env.JWT_SECRET,
     { expiresIn: "7d" }
   );
-
   //   res.cookie("auth", token, {
   //     httpOnly: true,
   //     sameSite: "lax",

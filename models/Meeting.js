@@ -10,6 +10,7 @@ const meetingSchema = new mongoose.Schema({
     required: true,
   },
   duration: Number,
+  me: String,
   participants: {
     type: [String],
     validate: (v) => v.length <= 2,

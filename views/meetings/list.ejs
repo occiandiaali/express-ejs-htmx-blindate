@@ -1,10 +1,13 @@
 <ul class="meeting-list">
   <% meetings.forEach(m => { %>
   <li>
-    <a hx-get="/meetings/<%= m._id %>" hx-target="#content" hx-push-url="true">
-      <%= m.participants.join(" & ") %><br />
-      <%= m.meetingID %> — Starts <%= m.startDate %> @ <%= m.startTime %> — <%=
-      m.sceneType %>
+    <a
+      hx-get="/meetings/<%= m._id %>"
+      hx-target="#content"
+      hx-push-url="true"
+      style="cursor: pointer"
+    >
+      Participants: <%= m.participants.join(" & ") %> on <%= m.startDate %>
     </a>
     <!-- <button style="background-color: green; color: white">Join</button> -->
     <button

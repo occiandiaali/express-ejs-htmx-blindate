@@ -111,8 +111,14 @@ export function newForm(req, res) {
 }
 
 export async function create(req, res) {
-  const { targetUsername, startDate, startTime, sceneType, duration } =
-    req.body;
+  const {
+    targetUsername,
+    currentUser,
+    startDate,
+    startTime,
+    sceneType,
+    duration,
+  } = req.body;
 
   const meetingID = crypto.randomBytes(6).toString("hex");
   //   const sceneURL = `https://playcanv.as/p/your-scene-id/?` +
@@ -129,14 +135,21 @@ export async function create(req, res) {
   } else if (sceneType === "white_court") {
     baseUrl = "https://playcanv.as/p/ITn9wsmF/";
   } else if (sceneType === "haunted_house") {
-    baseUrl = " https://playcanv.as/p/0ue0ILM8/";
+    // baseUrl = " https://playcanv.as/p/0ue0ILM8/";
+    baseUrl = "https://playcanv.as/p/i7WYC5nR/";
   }
   // if (sceneType === "collonade_park") {}
   // if (sceneType === "collonade_park") {}
+  // const sceneURL =
+  //   `${baseUrl}?` +
+  //   `meetingID=${encodeURIComponent(meetingID)}` +
+  //   `&host=${encodeURIComponent(req.user.username)}` +
+  //   `&guest=${encodeURIComponent(targetUsername)}` +
+  //   `&duration=${encodeURIComponent(duration)}`;
   const sceneURL =
     `${baseUrl}?` +
     `meetingID=${encodeURIComponent(meetingID)}` +
-    `&host=${encodeURIComponent(req.user.username)}` +
+    `&me=${encodeURIComponent(currentUser)}` +
     `&guest=${encodeURIComponent(targetUsername)}` +
     `&duration=${encodeURIComponent(duration)}`;
 
@@ -148,8 +161,11 @@ export async function create(req, res) {
       sceneType,
       duration,
       sceneURL,
+      me: currentUser,
       participants: [req.user.username, targetUsername],
     });
+    console.log(`sceneUrl: ${sceneURL}`);
+    console.log(`Current user ${currentUser}`);
 
     const meetings = await Meeting.find({
       participants: req.user.username,

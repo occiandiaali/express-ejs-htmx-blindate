@@ -10,6 +10,11 @@
   >
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
     <input type="hidden" name="targetUsername" value="<%= targetUsername %>" />
+    <input
+      type="hidden"
+      name="currentUser"
+      value="<%= currentUser.username %>"
+    />
 
     <label style="font-size: small">Start date (YYYY/mm/dd)</label>
     <!-- <input name="startDate" placeholder="2025/12/31" required /><br /> -->
