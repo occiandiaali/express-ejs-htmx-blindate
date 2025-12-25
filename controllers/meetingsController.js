@@ -131,12 +131,14 @@ export async function create(req, res) {
 
   let baseUrl = "";
   if (sceneType === "collonade_park") {
-    baseUrl = "https://playcanv.as/p/kkYFilt6/";
+    //baseUrl = "https://playcanv.as/p/kkYFilt6/";
+    baseUrl = "https://playcanv.as/p/xO1wZq5b/";
   } else if (sceneType === "white_court") {
     baseUrl = "https://playcanv.as/p/ITn9wsmF/";
   } else if (sceneType === "haunted_house") {
-    // baseUrl = " https://playcanv.as/p/0ue0ILM8/";
-    baseUrl = "https://playcanv.as/p/i7WYC5nR/";
+    baseUrl = "https://playcanv.as/p/1KTW8pdN/";
+  } else if (sceneType === "building_site") {
+    baseUrl = "https://playcanv.as/p/Zzk7eFPt/";
   }
   // if (sceneType === "collonade_park") {}
   // if (sceneType === "collonade_park") {}
